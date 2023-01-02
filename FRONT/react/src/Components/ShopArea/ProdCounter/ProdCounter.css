@@ -1,0 +1,12 @@
+.ProdCounter{
+    width: 580px;
+    padding: 0px;
+    margin: 10px;
+}
+
+.ProdCounter img{
+	max-width: 100px;
+    max-height: 250px;
+    display: inline;
+}
+

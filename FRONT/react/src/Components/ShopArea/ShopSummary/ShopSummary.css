@@ -1,0 +1,6 @@
+.ShopSummary table th{
+	padding: 5px;
+}
+.ShopSummary table td{
+	border: 1px solid black;
+}
