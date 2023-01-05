@@ -5,6 +5,7 @@ import config from "../../../Utils/Config";
 import { ShopActionType, shopStore } from "../../../redux/ShopStore";
 import BuyModel from "../../../Models/BuyModel";
 import productsService from "../../../Services/ProductsService";
+import * as React from 'react'
 
 interface PropsProdCounter{
     product:ProductModel;  

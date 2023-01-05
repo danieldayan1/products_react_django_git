@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { productsStore } from "../../../redux/ProductsState";
 import "./TotalProducts.css";
+import React from "react";
 
 function TotalProducts(): JSX.Element {
 
     const [count, setCount] = useState<number>(0);
-
+    let flag = productsStore.getState().updateFlag
 
     useEffect(() => {
         //Take products length when our site is up
@@ -20,7 +21,7 @@ function TotalProducts(): JSX.Element {
             unsubscribe();
         }
 
-    }, [])
+    }, [flag])
 
 
     return (

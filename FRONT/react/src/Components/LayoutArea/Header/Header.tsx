@@ -1,9 +1,10 @@
-import ProductModel from "../../../Models/ProductModel";
+
 import AuthMenu from "../../AuthArea/AuthMenu/AuthMenu";
 import "./Header.css";
+import React from "react";
 
 function Header(): JSX.Element {
-    return (
+    return (  
         <div className="Header">
             <AuthMenu />
             <h1>My First App!</h1>

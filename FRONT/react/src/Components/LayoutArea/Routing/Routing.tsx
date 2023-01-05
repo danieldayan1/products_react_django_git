@@ -10,6 +10,7 @@ import ProductsList from "../../ProductsArea/ProductsList/ProductsList";
 import ProdCountersList from "../../ShopArea/ProdCountersList/ProdCountersList";
 import ShopSummary from "../../ShopArea/ShopSummary/ShopSummary";
 import NotFound404 from "../NotFound404/NotFound404";
+import React from "react";
 
 
 function Routing(): JSX.Element {

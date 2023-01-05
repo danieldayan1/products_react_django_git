@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UserModel from "../../../Models/UserModel";
 import authService from "../../../Services/AuthService";
 import "./Register.css";
+import * as React from 'react'
 
 function Register(): JSX.Element {
 

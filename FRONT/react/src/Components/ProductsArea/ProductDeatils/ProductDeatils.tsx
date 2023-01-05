@@ -5,6 +5,8 @@ import productService from "../../../Services/ProductsService";
 import { useEffect , useState } from "react";
 import ProductModel from "../../../Models/ProductModel";
 import { NavLink } from "react-router-dom";
+import * as React from 'react'
+import { productsStore } from "../../../redux/ProductsState";
 
 
 
@@ -13,14 +15,16 @@ function ProductDeatils(): JSX.Element{
     const params = useParams()
     const navigate = useNavigate()
     const [product , setProduct] = useState<ProductModel>()
+    let flag = productsStore.getState().updateFlag
     
-    useEffect(()=>{
+    useEffect(()=>{ 
         const prodId = +params.prodId
+        
         productService.getOneProductById(prodId)
             .then(p => setProduct(p))
             .catch(err => navigate("/products"))
 
-       } , [true])
+       } , [flag])
 
 
     function deleteProduct(){

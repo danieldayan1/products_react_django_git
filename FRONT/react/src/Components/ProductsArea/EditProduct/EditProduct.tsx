@@ -6,6 +6,7 @@ import { productsStore } from "../../../redux/ProductsState";
 import productsService from "../../../Services/ProductsService";
 import config from "../../../Utils/Config";
 import "./EditProduct.css";
+import * as React from 'react'
 
 function EditProduct(): JSX.Element {
 
@@ -50,7 +51,7 @@ function EditProduct(): JSX.Element {
                         min: { value: 3, message: "Name too short" },
                         max: { value: 25, message: "Name too long" }
                     })} />
-                    <span>{formState.errors.name?.message}</span>
+                    {/* <span>{formState.errors.name.message}</span> */}
                     <label>Name</label>
                 </div>
 
@@ -60,7 +61,7 @@ function EditProduct(): JSX.Element {
                         min: { value: 1, message: "price cant be below 1" },
                         max: { value: 200, message: "price cant be over 200" }
                     })} />
-                    <span>{formState.errors.price?.message}</span>
+                    {/* <span>{formState.errors.price.message}</span> */}
                     <label>Price</label>
                 </div>
 
@@ -70,10 +71,10 @@ function EditProduct(): JSX.Element {
                         min: { value: 1, message: "stock cant be below 1" },
                         max: { value: 100, message: "stock cant be over 100" }
                     })} />
-                    <span>{formState.errors.stock?.message}</span>
+                    {/* <span>{formState.errors.stock.message}</span> */}
                     <label>stock</label>
                 </div>
-                <img src={config.productImagesUrl + product?.imageName} />
+                {/* <img src={config.productImagesUrl + product.imageName} /> */}
 
                 <div className="input-group mb-3">
                     <input type="file" className="form-control" id="inputGroupFile01" accept="image/*"  {...register("image")} />

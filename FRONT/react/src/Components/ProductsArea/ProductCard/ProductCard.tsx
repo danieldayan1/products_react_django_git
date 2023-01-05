@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 import ProductModel from "../../../Models/ProductModel";
 import config from "../../../Utils/Config";
 import "./ProductCard.css";
+import * as React from 'react'
 
 interface ProductCardProps {
     product: ProductModel;
 }
-
 
 function ProductCard(props: ProductCardProps): JSX.Element {
 

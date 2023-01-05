@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ProductModel from "../../../Models/ProductModel";
 import productsService from "../../../Services/ProductsService";
 import "./AddProduct.css";
+import * as React from 'react'
 
 function AddProduct(): JSX.Element {
 
@@ -13,8 +14,8 @@ function AddProduct(): JSX.Element {
     async function send(product: ProductModel) {
         try {
             const addedProduct = await productsService.addProduct(product);
-            navigate("/products");
-            console.log(addedProduct);
+            alert('product added succsessfuly !');
+            navigate("/products/");
         }
         catch (err: any) {
             alert(err.message);
@@ -33,7 +34,7 @@ function AddProduct(): JSX.Element {
                         min: { value: 3, message: "Name too short" },
                         max: { value: 25, message: "Name too long" }
                     })} />
-                    <span>{formState.errors.name?.message}</span>
+                    {/* <span>{formState.errors.name.message}</span> */}
                     <label>Name</label>
                 </div>
 
@@ -43,7 +44,7 @@ function AddProduct(): JSX.Element {
                         min: { value: 1, message: "price cant be below 1" },
                         max: { value: 100, message: "price cant be over 100" }
                     })} />
-                    <span>{formState.errors.price?.message}</span>
+                    {/* <span>{formState.errors.price.message}</span> */}
                     <label>Price</label>
                 </div>
 
@@ -53,7 +54,7 @@ function AddProduct(): JSX.Element {
                         min: { value: 1, message: "stock cant be below 1" },
                         max: { value: 100, message: "stock cant be over 100" }
                     })} />
-                    <span>{formState.errors.stock?.message}</span>
+                    {/* <span>{formState.errors.stock.message}</span> */}
                     <label>stock</label>
                 </div>
                 <div className="input-group mb-3">

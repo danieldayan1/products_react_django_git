@@ -5,6 +5,7 @@ import ProductModel from "../Models/ProductModel";
 // 1. Global State -
 export class ProductsState {
     public products: ProductModel[] = [];
+    public updateFlag: Boolean = false; 
 }
 
 // 2. Action Type - the list of operation we perform on our global state:
@@ -31,20 +32,24 @@ export function productsReducer(currentState = new ProductsState(), action: Prod
 
         case ProductsActionType.FetchAllProducts: // Here the payload is a list of products (ProductsModel[])
             newState.products = action.payload;
+            newState.updateFlag = !newState.updateFlag;
             break;
         case ProductsActionType.AddProduct: //Here the payload is product to add (ProductModel)
             newState.products.push(action.payload);
+            newState.updateFlag = !newState.updateFlag;
             break;
         case ProductsActionType.EditProduct: //Here the payload is a product to Edit (ProductModel)
             const indexToUpdate = newState.products.findIndex(p => p.id === action.payload.id)
             if (indexToUpdate >= 0) {
                 newState.products[indexToUpdate] = action.payload;
+                newState.updateFlag = !newState.updateFlag;
             }
             break;
         case ProductsActionType.DeleteProduct: //Here the payload is the id of the product to delete (number)
             const indexToDelete = newState.products.findIndex(p => p.id === action.payload);
             if (indexToDelete >= 0) {
                 newState.products.splice(indexToDelete, 1);
+                newState.updateFlag = !newState.updateFlag;
             }
             break;
     }

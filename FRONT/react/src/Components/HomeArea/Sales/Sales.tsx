@@ -1,4 +1,5 @@
 import "./Sales.css";
+import * as React from 'react'
 
 function Sales(): JSX.Element {
 

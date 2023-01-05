@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Clock.css";
+import * as React from 'react'
 
 function Clock(): JSX.Element {
 

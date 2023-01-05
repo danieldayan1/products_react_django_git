@@ -6,6 +6,7 @@ import productsService from "../../../Services/ProductsService";
 import Loading from "../../SharedArea/Loading/Loading";
 import ProdCounter from "../ProdCounter/ProdCounter";
 import "./ProdCountersList.css";
+import * as React from 'react'
 
 function ProdCountersList():JSX.Element { 
 			

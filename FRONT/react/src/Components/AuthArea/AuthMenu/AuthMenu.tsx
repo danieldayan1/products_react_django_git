@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/UserModel";
 import { authStore } from "../../../redux/AuthStore";
 import "./AuthMenu.css";
+import * as React from 'react'
 
 function AuthMenu(): JSX.Element {
 

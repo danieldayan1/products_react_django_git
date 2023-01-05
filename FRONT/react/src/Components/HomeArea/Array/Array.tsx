@@ -1,4 +1,5 @@
 import "./Array.css";
+import * as React from 'react'
 
 function Array(): JSX.Element {
     

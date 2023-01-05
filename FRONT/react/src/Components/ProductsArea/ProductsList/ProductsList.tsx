@@ -5,15 +5,18 @@ import productsService from "../../../Services/ProductsService";
 import Loading from "../../SharedArea/Loading/Loading";
 import ProductCard from "../ProductCard/ProductCard";
 import "./ProductsList.css";
+import * as React from 'react'
+import { productsStore } from "../../../redux/ProductsState";
 
 function ProductsList(): JSX.Element {
     const [products, setProducts] = useState<ProductModel[]>([]);
+    let flag = productsStore.getState().updateFlag
 
     useEffect(() => {
         productsService.fetchAllProducts()
             .then(productsFromBackend => setProducts(productsFromBackend))
             .catch(err => alert(err.message))
-    }, [])
+    }, [flag])
 
     return (
         <div className="ProductsList">

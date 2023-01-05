@@ -5,6 +5,7 @@ import ProductModel from "../../../Models/ProductModel";
 import { productsStore } from "../../../redux/ProductsState";
 import { shopStore } from "../../../redux/ShopStore";
 import "./ShopSummary.css";
+import * as React from 'react'
 
 function ShopSummary(): JSX.Element {
 

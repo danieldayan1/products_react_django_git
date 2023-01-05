@@ -22,14 +22,15 @@ class ProductsService {
     public async getOneProductById(id: number): Promise<ProductModel> {
 
         let products = productsStore.getState().products;
-
-        let product = products.find(p => p.id === id);
-
+        
+        let product =  products.find((p:ProductModel) => p.id === id);
+        
         if (!product) {
+           
             const response = await axios.get<ProductModel>(config.productsUrl + id);
             product = response.data;
         }
-
+        
         return product;
     }
 
@@ -65,7 +66,7 @@ class ProductsService {
             `${product.name} , ${product.stock} , ${product.price}`)
         const editedProduct = response.data;
         productsStore.dispatch({ type: ProductsActionType.EditProduct, payload: editedProduct })
-       
+        
         return editedProduct;
     }
 

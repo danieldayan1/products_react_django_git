@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import React from "react";
 import TotalProducts from "../../ProductsArea/TotalProducts/TotalProducts";
 import "./Menu.css";
 
