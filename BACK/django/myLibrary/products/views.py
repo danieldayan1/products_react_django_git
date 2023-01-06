@@ -24,9 +24,9 @@ def products(request  , my_id = 0  , prod = " "):
     if request.method == "POST":
         line = prod.split(',')
         last_id = Product.objects.last().id
-        product = Product.objects.create(id = last_id+1 , name = line[0] , stock = int(line[1]) , price = int(line[2]))
+        product = Product.objects.create(id = last_id+1 , name = line[0] , stock = int(line[1]) , price = int(line[2]) , imageName = f"{last_id+1}.jpg")
         product.save()
-        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock },safe=False) 
+        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName':product.imageName},safe=False) 
     elif request.method == "PUT":
         line = prod.split(',')
         product = Product.objects.get(id = my_id)
@@ -34,7 +34,7 @@ def products(request  , my_id = 0  , prod = " "):
         product.stock = int(line[1])
         product.price = int(line[2])
         product.save()
-        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock },safe=False) 
+        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock ,'imageName':product.imageName},safe=False) 
     else:
         return HttpResponse("wrong choose !")
 
