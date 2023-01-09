@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_protect
 from .models import Product
 
-
+#products - CRUD
 def products(request  , my_id = 0  , prod = " "):
     if request.method == "GET":
         array =[]

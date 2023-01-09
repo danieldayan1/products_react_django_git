@@ -40,7 +40,7 @@ function ProdCounter(props:PropsProdCounter): JSX.Element {
 
 
     function editBuy() {
-        
+        //1
         // let myCounter = counter+1 
         // let buy = new BuyModel()
         // buy.id = props.product.id;
