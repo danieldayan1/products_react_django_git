@@ -6,12 +6,13 @@ import BuyModel from "../Models/BuyModel";
 // 1. Global State -
 export class ShopState {
     public buys:BuyModel[]=[] ;
+    updateFlag:boolean = false
 }
 
 
 // 2. Action Type - the list of operation we perform on our global state:
 export enum ShopActionType {
-    EditProduct = "Edit Product" ,
+    EditBuy = "Edit Buy" ,
     FetchAllBuys = "Fetch All Buys"
 }
 
@@ -28,16 +29,18 @@ export function shopReducer(currentState = new ShopState(), action: ShopAction) 
     const newState = { ...currentState };
 
     switch(action.type){
-        case ShopActionType.EditProduct : //Here the payload is a product to Edit 
+        case ShopActionType.EditBuy : //Here the payload is a product to Edit 
             const indexToUpdate = newState.buys.findIndex(buy => buy.id === action.payload.id)
             if (indexToUpdate >= 0) {
                 newState.buys[indexToUpdate] = action.payload;
             }else{
                 newState.buys.push(action.payload)
             }
+            newState.updateFlag = !newState.updateFlag
             break;
         case ShopActionType.FetchAllBuys:
             newState.buys = action.payload;
+            // newState.updateFlag = !newState.updateFlag
             break;
     }
 

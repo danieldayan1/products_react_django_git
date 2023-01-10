@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import BuyModel from "../../../Models/BuyModel";
 import ProductModel from "../../../Models/ProductModel";
@@ -11,6 +11,15 @@ function ShopSummary(): JSX.Element {
 
     const buys:BuyModel[]= shopStore.getState().buys;
     const products:ProductModel[] = productsStore.getState().products;
+    const [total , setTotal] = useState<number>(0)
+
+    useEffect(()=>{
+        let total = 0 ; 
+        for(let i=0 ; i<buys.length ; i++){
+            total += buys.at(i).price
+        }
+        setTotal(total)
+    },[])
 
     return (
         <div className="ShopSummary">
@@ -23,9 +32,10 @@ function ShopSummary(): JSX.Element {
                 {buys.map(buy => <tr>
                     <td>{products.filter(p=>p.id === buy.id)[0].name}</td>
                     <td>{buy.amount}</td>
-                    <td>{buy.price}</td>
+                    <td>{buy.price}$</td>
                 </tr>
                 )}
+                <tr><td colSpan={3}>Total: {total}$</td></tr>
                 <tr><td colSpan={3} ><NavLink to="/shop"><button>FINISH</button></NavLink></td></tr> 
             </table>
     
