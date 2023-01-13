@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import BuyModel from "../../../Models/BuyModel";
 import ProductModel from "../../../Models/ProductModel";
 import { productsStore } from "../../../redux/ProductsState";
 import { shopStore } from "../../../redux/ShopStore";
 import "./ShopSummary.css";
 import * as React from 'react'
+import productsService from "../../../Services/ProductsService";
 
 function ShopSummary(): JSX.Element {
 
     const buys:BuyModel[]= shopStore.getState().buys;
     const products:ProductModel[] = productsStore.getState().products;
     const [total , setTotal] = useState<number>(0)
+    const navigate  = useNavigate()
 
     useEffect(()=>{
         let total = 0 ; 
@@ -20,6 +22,27 @@ function ShopSummary(): JSX.Element {
         }
         setTotal(total)
     },[])
+
+
+    const finishBuy = () =>{
+        let success = true;
+        for(let i=0;i<buys.length;i++){
+            productsService.getOneProductById(buys[i].id) //Get Product to edit from service
+            .then(prodToEdit => {
+                prodToEdit.stock = prodToEdit.stock - buys[i].amount
+                productsService.editProduct(prodToEdit)
+                .then(editedProduct => { })
+                .catch(err=> success = false)
+                })
+            .catch(err=> success = false)
+            }
+            if(success){
+                alert("purchase has been made !");
+                navigate("/shop");
+            }else{
+                alert("purchased failed . please try again !")
+            }
+    }
 
     return (
         <div className="ShopSummary">
@@ -36,7 +59,7 @@ function ShopSummary(): JSX.Element {
                 </tr>
                 )}
                 <tr><td colSpan={3}>Total: {total}$</td></tr>
-                <tr><td colSpan={3} ><NavLink to="/shop"><button>FINISH</button></NavLink></td></tr> 
+                <tr><td colSpan={3} ><button onClick={finishBuy}>FINISH</button></td></tr> 
             </table>
     
             }
