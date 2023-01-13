@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm  } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import ProductModel from "../../../Models/ProductModel";
 import { productsStore } from "../../../redux/ProductsState";
@@ -7,13 +7,15 @@ import productsService from "../../../Services/ProductsService";
 import config from "../../../Utils/Config";
 import "./EditProduct.css";
 import * as React from 'react'
+import { ErrorMessage } from '@hookform/error-message';
+
 
 function EditProduct(): JSX.Element {
 
     const [product, setProduct] = useState<ProductModel>();
     const navigate = useNavigate();
     const params = useParams();
-    const { register, handleSubmit, formState, setValue } = useForm<ProductModel>();
+    const { register, handleSubmit, formState, setValue , formState: { errors }} = useForm<ProductModel>();
 
     useEffect(() => {
         const prodToEditId = +params.prodToEdit; //Get Id From Route
@@ -51,7 +53,7 @@ function EditProduct(): JSX.Element {
                         min: { value: 3, message: "Name too short" },
                         max: { value: 25, message: "Name too long" }
                     })} />
-                    {/* <span>{formState.errors.name.message}</span> */}
+                    <ErrorMessage errors={errors} name="name" render={({ message }) => <p>{message}</p>}/>
                     <label>Name</label>
                 </div>
 
@@ -61,7 +63,7 @@ function EditProduct(): JSX.Element {
                         min: { value: 1, message: "price cant be below 1" },
                         max: { value: 200, message: "price cant be over 200" }
                     })} />
-                    {/* <span>{formState.errors.price.message}</span> */}
+                    <ErrorMessage errors={errors} name="price" render={({ message }) => <p>{message}</p>}/>
                     <label>Price</label>
                 </div>
 
@@ -71,10 +73,9 @@ function EditProduct(): JSX.Element {
                         min: { value: 1, message: "stock cant be below 1" },
                         max: { value: 100, message: "stock cant be over 100" }
                     })} />
-                    {/* <span>{formState.errors.stock.message}</span> */}
-                    <label>stock</label>
+                    <ErrorMessage errors={errors} name="stock" render={({ message }) => <p>{message}</p>}/>
+                    <label>stock</label>    
                 </div>
-                {/* <img src={config.productImagesUrl + product.imageName} /> */}
 
                 <div className="input-group mb-3">
                     <input type="file" className="form-control" id="inputGroupFile01" accept="image/*"  {...register("image")} />

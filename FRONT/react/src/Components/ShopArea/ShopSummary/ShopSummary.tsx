@@ -30,7 +30,7 @@ function ShopSummary(): JSX.Element {
             productsService.getOneProductById(buys[i].id) //Get Product to edit from service
             .then(prodToEdit => {
                 prodToEdit.stock = prodToEdit.stock - buys[i].amount
-                productsService.editProduct(prodToEdit)
+                productsService.editProduct(prodToEdit) // Edit product with new amount
                 .then(editedProduct => { })
                 .catch(err=> success = false)
                 })

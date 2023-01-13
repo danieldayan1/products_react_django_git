@@ -20,8 +20,8 @@ function ProductCard(props: ProductCardProps): JSX.Element {
                         <img src={config.productImagesUrl + props.product.imageName} className="card-img-top" alt="..." />
                     </NavLink>
                     <div className="card-body">
-                        <h5 className="card-title">{props.product.name}</h5>
-                        <p className="card-text">{props.product.price}₪</p>
+                        <h5 className="card-title">name:{props.product.name}</h5>
+                        <p className="card-text">price:{props.product.price}₪</p>
                         <p className="card-text">stock: {props.product.stock}</p>
                     </div>
                 </div>
