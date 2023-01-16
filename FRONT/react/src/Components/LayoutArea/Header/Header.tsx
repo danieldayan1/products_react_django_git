@@ -2,12 +2,13 @@
 import AuthMenu from "../../AuthArea/AuthMenu/AuthMenu";
 import "./Header.css";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Header(): JSX.Element {
     return (  
         <div className="Header">
             <AuthMenu />
-            <h1>My First App!</h1>
+            <div className="home"><NavLink to="/home"><h1>Shop Online!</h1></NavLink></div>
         </div>
     );
 }

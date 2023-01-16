@@ -16,6 +16,7 @@ function EditProduct(): JSX.Element {
     const navigate = useNavigate();
     const params = useParams();
     const { register, handleSubmit, formState, setValue , formState: { errors }} = useForm<ProductModel>();
+    const [cat , setCat] = useState<number>(0);
 
     useEffect(() => {
         const prodToEditId = +params.prodToEdit; //Get Id From Route
@@ -27,6 +28,7 @@ function EditProduct(): JSX.Element {
                 setValue("name", prodToEdit.name);
                 setValue("price", prodToEdit.price);
                 setValue("stock", prodToEdit.stock);
+                setCat(+prodToEdit.category)
             })
             .catch(err => alert(err.message)) // show message if something went wrong
             
@@ -34,6 +36,7 @@ function EditProduct(): JSX.Element {
 
 
     function send(formProduct: ProductModel) {
+        formProduct.category = cat;
         productsService.editProduct(formProduct)
             .then(editedProduct => { 
                 setProduct(editedProduct)
@@ -76,6 +79,27 @@ function EditProduct(): JSX.Element {
                     <ErrorMessage errors={errors} name="stock" render={({ message }) => <p>{message}</p>}/>
                     <label>stock</label>    
                 </div>
+
+
+
+
+
+                <div className="form-floating mb-3">
+                    <select className="form-control" id="floatingInput" onChange={(option)=>setCat(+option.target.value)} >
+                        <option value={0}>ALL</option>
+                        {cat==1 ? <option value={1} selected>vegetables & fruits</option>:<option value={1}>vegetables & fruits</option>}
+                        {cat==2 ? <option value={2} selected>meat</option>:<option value={2}>meat</option>}
+                        {cat==3 ? <option value={3} selected>cakes</option>:<option value={3}>cakes</option>}
+                        {cat==4 ? <option value={4} selected>drinks</option>:<option value={4}>drinks</option>}
+                    </select>
+                    <ErrorMessage errors={errors} name="category" render={({ message }) => <p>{message}</p>}/>
+                    <label>category</label>
+                </div>
+
+
+
+
+
 
                 <div className="input-group mb-3">
                     <input type="file" className="form-control" id="inputGroupFile01" accept="image/*"  {...register("image")} />

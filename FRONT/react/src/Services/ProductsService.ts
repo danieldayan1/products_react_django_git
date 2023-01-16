@@ -18,7 +18,6 @@ class ProductsService {
         return products;
     }
 
-
     public async getOneProductById(id: number): Promise<ProductModel> {
 
         let products = productsStore.getState().products;
@@ -34,6 +33,17 @@ class ProductsService {
         return product;
     }
 
+    public async getProductsByCategory(category:number):Promise<ProductModel[]>{
+
+        let products = productsStore.getState().products;
+        let products_category =  products.filter((p:ProductModel) => p.category === category);
+        
+        if (products_category.length == 0 || category == 0 ) {
+            return products
+        }
+        return products_category
+    }
+
     public async addProduct(product: ProductModel): Promise<ProductModel> {
 
         const formData = new FormData();
@@ -42,9 +52,10 @@ class ProductsService {
         formData.append("price", product.price.toString())
         formData.append("stock", product.stock.toString())
         formData.append("image", product.image.item(0))
-        
+        formData.append("category", product.category.toString())
+       
         const response = await axios.post<ProductModel>(config.productsUrl+  
-        `${product.name} , ${product.stock} , ${product.price}`);
+        `${product.name} , ${product.stock} , ${product.price} , ${product.category}`);
         const addedProduct = response.data;
 
 
@@ -58,12 +69,14 @@ class ProductsService {
         formData.append("name", product.name)
         formData.append("price", product.price.toString())
         formData.append("stock", product.stock.toString())
+        formData.append("category", product.category.toString())
         if (product.image) {
             formData.append("image", product.image.item(0))
         }
-
+       
+        
         const response = await axios.put<ProductModel>(config.productsUrl + product.id + '/' +
-            `${product.name} , ${product.stock} , ${product.price}`)
+            `${product.name} , ${product.stock} , ${product.price} , ${product.category}`)
         const editedProduct = response.data;
         productsStore.dispatch({ type: ProductsActionType.EditProduct, payload: editedProduct })
         

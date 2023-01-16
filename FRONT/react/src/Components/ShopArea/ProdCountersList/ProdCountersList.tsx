@@ -34,21 +34,34 @@ function ProdCountersList():JSX.Element {
             unsubscribe();
         }
 
-
-
     }, [shopStore.getState().updateFlag])
 
-
+    const filterByCategory = (category:number)=>{
+        productsService.getProductsByCategory(category)
+        .then(productsFromBackend => setProducts(productsFromBackend))
+        .catch(err => alert(err.message))
+    }
 
     return (
         <div className="ProdCountersList">
 
             {products.length === 0 && <Loading />}
-            <span style ={{position:"absolute",margin:"5px"}}><NavLink to="/shop/summary"><button>PURCHASE</button></NavLink></span>
+            <span><b>Category: </b></span><select onChange={(option)=>filterByCategory(+option.target.value)} >
+                        <option value={0}>ALL</option>
+                        <option value={1}>vegetables & fruits</option>
+                        <option value={2}>meat</option>
+                        <option value={3}>cakes</option>
+                        <option value={4}>drinks</option>
+            </select>
+            <br /><br />
             <div className="row row-cols-1 row-cols-md-3 g-1">
                 {products.map(p => <ProdCounter key={p.id} product={p} />)}
             </div>
-            <p>TOTAL PRICE:{totalBuys}$</p>
+            <br /><br />
+            <p>
+                TOTAL PRICE:{totalBuys}$ 
+                <span style ={{position:"absolute",margin:"5px"}}><NavLink to="/shop/summary"><button>PURCHASE</button></NavLink></span>
+            </p>
         </div>
     );
 }
