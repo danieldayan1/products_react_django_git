@@ -29,8 +29,7 @@ function ProductsList(): JSX.Element {
         <div className="ProductsList">
 
             {products.length === 0 && <Loading />}
-            <NavLink to="/products/new">➕</NavLink>
-           <span><b>Category:</b></span> <select  onChange={(option)=>filterByCategory(+option.target.value)} >
+           <span><NavLink to="/products/new" title="add product" style={{textDecoration:"none"}}>➕</NavLink>  <b>Category:</b></span> <select  onChange={(option)=>filterByCategory(+option.target.value)} >
                         <option value={0}>ALL</option>
                         <option value={1}>vegetables & fruits</option>
                         <option value={2}>meat</option>

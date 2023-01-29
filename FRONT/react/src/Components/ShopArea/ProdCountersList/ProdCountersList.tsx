@@ -59,8 +59,7 @@ function ProdCountersList():JSX.Element {
             </div>
             <br /><br />
             <p>
-                TOTAL PRICE:{totalBuys}$ 
-                <span style ={{position:"absolute",margin:"5px"}}><NavLink to="/shop/summary"><button>PURCHASE</button></NavLink></span>
+                TOTAL PRICE:{totalBuys}$  <span style ={{position:"relative"  ,margin:"5px"}}><NavLink to="/shop/summary"><button>PURCHASE</button></NavLink></span>
             </p>
         </div>
     );

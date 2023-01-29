@@ -51,7 +51,7 @@ class ProductsService {
         formData.append("name", product.name)
         formData.append("price", product.price.toString())
         formData.append("stock", product.stock.toString())
-        formData.append("image", product.image.item(0))
+        // formData.append("image", product.image.item(0))
         formData.append("category", product.category.toString())
        
         const response = await axios.post<ProductModel>(config.productsUrl+  
@@ -70,9 +70,9 @@ class ProductsService {
         formData.append("price", product.price.toString())
         formData.append("stock", product.stock.toString())
         formData.append("category", product.category.toString())
-        if (product.image) {
-            formData.append("image", product.image.item(0))
-        }
+        // if (product.image) {
+        //     formData.append("image", product.image.item(0))
+        // }
        
         
         const response = await axios.put<ProductModel>(config.productsUrl + product.id + '/' +

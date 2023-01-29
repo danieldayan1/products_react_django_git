@@ -15,7 +15,7 @@ def products(request  , my_id = 0  , prod = " "):
         array =[]
         products = Product.objects.all()
         for product in products:
-            array.append({'id':product.id , 'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName': product.imageName})
+            array.append({'id':product.id , 'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName': product.imageName , 'category':product.category })
         return JsonResponse(array,safe=False)
     elif request.method == "DELETE":
         prod = Product.objects.get(id = my_id)
@@ -24,17 +24,26 @@ def products(request  , my_id = 0  , prod = " "):
     if request.method == "POST":
         line = prod.split(',')
         my_id = Product.objects.last().id+1
-        product = Product.objects.create(id = my_id , name = line[0] , stock = int(line[1]) , price = int(line[2]) , imageName = f'{my_id}.jpg')
+        if my_id<=77:
+            my_image = f'{my_id}.jpg' 
+        else: 
+            my_image = '1.jpg' 
+        product = Product.objects.create(id = my_id , name = line[0] , stock = int(line[1]) , price = int(line[2]) , imageName = my_image , category = int(line[3]))
         product.save()
-        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName':f'{product.id}.jpg' },safe=False) 
+        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName':product.imageName , 'category':product.category},safe=False) 
     elif request.method == "PUT":
         line = prod.split(',')
         product = Product.objects.get(id = my_id)
         product.name = line[0]
         product.stock = int(line[1])
         product.price = int(line[2])
+        product.category = int(line[3])
+        if my_id<=77:
+            my_image = f'{my_id}.jpg' 
+        else: 
+            my_image = '1.jpg'
         product.save()
-        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName':f'{product.id}.jpg' },safe=False) 
+        return JsonResponse({'id':product.id ,'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName':product.imageName , 'category':product.category },safe=False) 
     else:
         return HttpResponse("wrong choose !")
 

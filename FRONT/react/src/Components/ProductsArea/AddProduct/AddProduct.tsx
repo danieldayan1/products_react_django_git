@@ -77,9 +77,9 @@ function AddProduct(this: any): JSX.Element {
 
 
 
-                <div className="input-group mb-3">
+                {/* <div className="input-group mb-3">
                     <input type="file" className="form-control" id="inputGroupFile01" accept="image/*" {...register("image")} />
-                </div>
+                </div> */}
                 <button className="btn btn-primary">Add</button>
             </form>
         </div>
