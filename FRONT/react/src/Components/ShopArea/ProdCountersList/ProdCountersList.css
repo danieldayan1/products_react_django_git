@@ -2,3 +2,14 @@
     max-width: 1200px;
 }
 
+.button_no_active{
+    position: relative;
+    margin:5px;
+    pointer-events: none;
+}
+
+.button_active{
+    position: relative;
+    margin:5px;
+    pointer-events: auto;
+}

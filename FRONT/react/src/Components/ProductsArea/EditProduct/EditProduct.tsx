@@ -20,7 +20,7 @@ function EditProduct(): JSX.Element {
 
     useEffect(() => {
         const prodToEditId = +params.prodToEdit; //Get Id From Route
-
+       
         productsService.getOneProductById(prodToEditId) //Get Product to edit from service
             .then(prodToEdit => {
                 setProduct(prodToEdit);

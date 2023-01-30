@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BuyModel from "../../../Models/BuyModel";
 import ProductModel from "../../../Models/ProductModel";
 import { productsStore } from "../../../redux/ProductsState";
@@ -10,17 +10,24 @@ import productsService from "../../../Services/ProductsService";
 
 function ShopSummary(): JSX.Element {
 
-    const buys:BuyModel[]= shopStore.getState().buys;
+    let buys:BuyModel[] = shopStore.getState().buys;
     const products:ProductModel[] = productsStore.getState().products;
     const [total , setTotal] = useState<number>(0)
-    const navigate  = useNavigate()
+    const navigate  = useNavigate();
 
     useEffect(()=>{
-        let total = 0 ; 
+        
+        let total=0
         for(let i=0 ; i<buys.length ; i++){
             total += buys.at(i).price
         }
+
+        if(total==0){      //load total price from cookies
+            total = parseInt(localStorage.getItem("total"))
+        }
+
         setTotal(total)
+        localStorage.setItem("total",total.toString())   //save total price in cookies
     },[])
 
 
@@ -38,6 +45,7 @@ function ShopSummary(): JSX.Element {
             }
             if(success){
                 alert("purchase has been made !");
+                localStorage.removeItem("total")
                 navigate("/shop");
             }else{
                 alert("purchased failed . please try again !")

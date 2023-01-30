@@ -25,8 +25,8 @@ class ProductsService {
         let product =  products.find((p:ProductModel) => p.id === id);
         
         if (!product) {
-           
-            const response = await axios.get<ProductModel>(config.productsUrl + id);
+          
+            const response = await axios.get<ProductModel>(config.productsUrl + id); 
             product = response.data;
         }
         

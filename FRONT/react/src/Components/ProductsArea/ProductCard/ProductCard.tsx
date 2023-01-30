@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import ProductModel from "../../../Models/ProductModel";
 import config from "../../../Utils/Config";
@@ -11,6 +11,7 @@ interface ProductCardProps {
 }
 
 function ProductCard(props: ProductCardProps): JSX.Element {
+
 
     return (
         <div className="ProductCard">

@@ -14,8 +14,12 @@ def products(request  , my_id = 0  , prod = " "):
     if request.method == "GET":
         array =[]
         products = Product.objects.all()
-        for product in products:
-            array.append({'id':product.id , 'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName': product.imageName , 'category':product.category })
+        if my_id == 0:
+            for product in products:
+                array.append({'id':product.id , 'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName': product.imageName , 'category':product.category })
+        else:
+            product = products.get(id=my_id)
+            array={'id':product.id , 'name':product.name ,'price': product.price ,'stock': product.stock , 'imageName': product.imageName , 'category':product.category }
         return JsonResponse(array,safe=False)
     elif request.method == "DELETE":
         prod = Product.objects.get(id = my_id)
