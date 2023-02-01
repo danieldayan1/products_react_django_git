@@ -43,11 +43,19 @@ function ProductDeatils(): JSX.Element{
                 useId(parseInt(localStorage.getItem("id")))
             })
         
-       
+       return(()=>{
+        if(flag){
+            localStorage.removeItem("name");
+            localStorage.removeItem("price");
+            localStorage.removeItem("stock");
+            localStorage.removeItem("imgName");
+            localStorage.removeItem("id");
+        }
+       })
+
        } , [flag])
 
-
-    function deleteProduct(){
+    const deleteProduct = () =>{
         let pId:number=0
         if(product){
             pId = product.id;
@@ -61,7 +69,7 @@ function ProductDeatils(): JSX.Element{
             })
             .catch(err => alert(err.message))
         }
-
+  
 
     return (
         <div className="ProductDeatils Box">
@@ -74,7 +82,7 @@ function ProductDeatils(): JSX.Element{
                         <p className="card-text">stock: {product.stock?product.stock:stock}</p>
                     </div>
                     <NavLink to = '/products' ><button className="btn btn-warning">BACK</button></NavLink>
-                    {product.id?<NavLink to = {'/products/edit/'+product.id}><button className="btn btn-success">EDIT</button></NavLink>:<NavLink to = {`/products/edit/+${id}`}><button className="btn btn-success">EDIT</button></NavLink>}
+                    {product.id?<NavLink to = {'/products/edit/'+product.id}><button className="btn btn-success">EDIT</button></NavLink>:<NavLink to = {`/products/edit/+${id}`}><button className="btn btn-success" >EDIT</button></NavLink>}
                     <button className="btn btn-danger" onClick = {deleteProduct}>DELETE</button>
                 </div>
             </div>} 

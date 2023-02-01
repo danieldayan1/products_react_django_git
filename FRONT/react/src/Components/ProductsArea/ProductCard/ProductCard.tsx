@@ -12,12 +12,11 @@ interface ProductCardProps {
 
 function ProductCard(props: ProductCardProps): JSX.Element {
 
-
     return (
         <div className="ProductCard">
             <div className="col">
                 <div className="card" >
-                    <NavLink  to={`/products/details/` + "" +props.product.id}  style={{ textDecoration: 'none' }}>
+                    <NavLink  to={`/products/details/` + "" +props.product.id}  style={{ textDecoration: 'none' }} >
                     <img src={config.productImagesUrl + props.product.imageName} className="card-img-top" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title">name:{props.product.name}</h5>
